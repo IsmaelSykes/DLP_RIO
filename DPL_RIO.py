@@ -57,26 +57,29 @@ print("ccc:",ccc)
 ccv = nomial_voltage/(vfps*full_scale_Resample)
 print("ccv:",ccv)
 
-va = va*ccv
-ia = ia*ccc
-vb = vb*ccv
-ib = ib*ccc
-vc = vc*ccv
-ic = ic*ccc
 
-va_rms = np.max(va)*math.sqrt(2)
-ia_rms = np.max(ia)*math.sqrt(2)
-vb_rms = np.max(vb)*math.sqrt(2)
-ib_rms = np.max(ib)*math.sqrt(2)
-vc_rms = np.max(vc)*math.sqrt(2)
-ic_rms = np.max(ic)*math.sqrt(2)
+va_rms = va*math.sqrt(2)*ccv
+ia_rms = ia*math.sqrt(2)*ccc
+vb_rms = vb*math.sqrt(2)*ccv
+ib_rms = ib*math.sqrt(2)*ccc
+vc_rms = vc*math.sqrt(2)*ccv
+ic_rms = ic*math.sqrt(2)*ccc
+
+va = np.max(va)*ccv
+ia = np.max(ia)*ccc
+vb = np.max(vb)*ccv
+ib = np.max(ib)*ccc
+vc = np.max(vc)*ccv
+ic = np.max(ic)*ccc
+
+
 
 plt.figure(figsize = (12, 6))
 plt.subplot(121)
 plt.title(r'Current ')
-plt.plot(time,ia, 'b',label = r'$i_{a}(t), i_{arms} = %.4f$'%(ia_rms))
-plt.plot(time,ib, 'g',label = r'$i_{b}(t), i_{brms} = %.4f$'%(ib_rms))
-plt.plot(time,ic, 'r',label = r'$i_{c}(t), i_{crms} = %.4f$'%(ic_rms))
+plt.plot(time,ia_rms, 'b',label = r'$i_{a}(t), i_{arms} = %.4f$'%(ia))
+plt.plot(time,ib_rms, 'g',label = r'$i_{b}(t), i_{brms} = %.4f$'%(ib))
+plt.plot(time,ic_rms, 'r',label = r'$i_{c}(t), i_{crms} = %.4f$'%(ic))
 plt.xlabel('Time [s])')
 plt.ylabel('Amplitude [A]')
 plt.ticklabel_format(axis='both', style='sci',scilimits=(-3,3))
@@ -85,9 +88,9 @@ plt.legend(fancybox=True, framealpha=1, shadow=False, borderpad=1)
 
 plt.subplot(122)
 plt.title(r'Voltage')
-plt.plot(time,va, 'b',label = r'$v_{a}(t), v_{arms} = %.4f$'%(va_rms))
-plt.plot(time,vb, 'g',label = r'$v_{b}(t), v_{brms} = %.4f$'%(vb_rms))
-plt.plot(time,vc, 'r',label = r'$v_{c}(t), v_{crms} = %.4f$'%(vc_rms))
+plt.plot(time,va_rms, 'b',label = r'$v_{a}(t), v_{arms} = %.4f$'%(va))
+plt.plot(time,vb_rms, 'g',label = r'$v_{b}(t), v_{brms} = %.4f$'%(vb))
+plt.plot(time,vc_rms, 'r',label = r'$v_{c}(t), v_{crms} = %.4f$'%(vc))
 plt.ticklabel_format(axis='x', style='sci',scilimits=(-3,-3))
 plt.xlabel('Time [s]')
 plt.ylabel('Amplitude [V]')
